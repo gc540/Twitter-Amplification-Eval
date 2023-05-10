@@ -1,4 +1,4 @@
-# Examining the Role of Twitter's Recommender System in the Spread of Disinformation and Misinformation
+# Evaluating Twitter's Algorithmic Amplification of Low-Trust Content: An Observational Study
 ### Summary
 
 
