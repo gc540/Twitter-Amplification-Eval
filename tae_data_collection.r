@@ -53,8 +53,8 @@ extract_data_fromjson <- function(data_path) {
    return(df_unnested)
   }
 
-covid_tweets = extract_data_fromjson("twd_raw_data/tw_raw_data_covid/")
-climate_tweets = extract_data_fromjson("twd_raw_data/tw_raw_data_climate/")
+covid_tweets = extract_data_fromjson("tae_raw_data/tw_raw_data_covid/")
+climate_tweets = extract_data_fromjson("tae_raw_data/tw_raw_data_climate/")
 
 #######################################################################################################################
   # Create a function to flatten the twitter data. This is necessary as the twitter API returns a nested dataframe # 
@@ -121,10 +121,10 @@ get_lowtrust_tweets <- function(tweets_flat, low_trust_domains_filepath) {
 
   return(matched_tweets)
 }
-covid_lowtrust_tweets <- get_lowtrust_tweets(covid_tweets_flat, 'twd_processed_data/iffy_news_urls.csv')
-climate_lowtrust_tweets <- get_lowtrust_tweets(climate_tweets_flat, 'twd_processed_data/iffy_news_urls.csv')
-fwrite(covid_lowtrust_tweets, 'twd_processed_data/covid_lowtrust_tweets.csv')
-fwrite(climate_lowtrust_tweets, 'twd_processed_data/climate_lowtrust_tweets.csv')
+covid_lowtrust_tweets <- get_lowtrust_tweets(covid_tweets_flat, 'tae_processed_data/iffy_news_urls.csv')
+climate_lowtrust_tweets <- get_lowtrust_tweets(climate_tweets_flat, 'tae_processed_data/iffy_news_urls.csv')
+fwrite(covid_lowtrust_tweets, 'tae_processed_data/covid_lowtrust_tweets.csv')
+fwrite(climate_lowtrust_tweets, 'tae_processed_data/climate_lowtrust_tweets.csv')
 
 #######################################################################################################################
   # Collect timelines of users who have shared low-trust domains # 
@@ -147,11 +147,11 @@ collect_timelines <- function(lowtrust_tweets, directory) {
   return(tweets_list)
 }
 
-collect_timelines(covid_lowtrust_tweets,"twd_raw_data/tw_user_timelines_covid/")
-collect_timelines(climate_lowtrust_tweets, "twd_raw_data/tw_user_timelines_climate/")
+collect_timelines(covid_lowtrust_tweets,"tae_raw_data/tw_user_timelines_covid/")
+collect_timelines(climate_lowtrust_tweets, "tae_raw_data/tw_user_timelines_climate/")
 
-user_timelines_covid <-  extract_data_fromjson("twd_raw_data/tw_user_timelines_covid/")
-user_timeline_climate <- extract_data_fromjson("twd_raw_data/tw_user_timelines_climate/")
+user_timelines_covid <-  extract_data_fromjson("tae_raw_data/tw_user_timelines_covid/")
+user_timeline_climate <- extract_data_fromjson("tae_raw_data/tw_user_timelines_climate/")
 
 # Create a different flattening function specific to timelines that ignores URLs. This saves a significant amount of time. 
 flatten_timelines <- function(nonflat_data) {  
